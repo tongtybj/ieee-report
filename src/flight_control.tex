@@ -1,0 +1,172 @@
+\section{FLIGHT CONTROL FOR AERIAL TRANSFORMATION}
+
+\subsection{Dynamic Model}
+We assume that the multilinks act as a single rigid body at each time point, since the aerial transformation is operated slowly. With this assumption, the dynamics of the translational motion and rotational motion can be written as follows:
+\begin{equation}
+  \scalebox{0.9}{$
+  M\ddot{\bm{r}}_{CoG}=
+  \begin{bmatrix}
+    0 \\
+    0 \\
+    -Mg
+  \end{bmatrix}
+  +R
+  \begin{bmatrix}
+    0 \\
+    0 \\
+    \sum^{N}_{i=1}F_{i}
+  \end{bmatrix}
+  ; \\
+  R=R_{z}(\psi)R_{y}(\theta)R_{x}(\varphi) 
+  $}
+  \label{eq:translation_motioneq}
+\end{equation}
+
+\begin{equation}
+  \scalebox{0.9}{$
+  I_{multilink}
+  \begin{bmatrix}
+    \dot{w_x} \\
+    \dot{w_y} \\
+    \dot{w_z}
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    \sum^{N}_{i=1} y_{i}F_{i} \\
+    -\sum^{N}_{i=1} x_{i}F_{i} \\
+    \sum^{N}_{i=1} T_{i}
+  \end{bmatrix}
+  -
+  \begin{bmatrix}
+    w_x \\
+    w_y \\
+    w_z
+  \end{bmatrix}
+  \times I_{multilink}
+  \begin{bmatrix}
+    w_x \\
+    w_y \\
+    w_z
+  \end{bmatrix}
+  $}
+  \label{eq:rotation_motioneq}
+\end{equation}
+where $\bm{r}_{CoG}$ and $I_{multilink}$ are the positions of the center of mass and the principal moment of inertia respectively. $[ \ w_x \ w_y \ w_z \ ]^\mathrm{T}$ is the vector of the angular velocity of the multilink ,while $[ \ \dot{\varphi} \ \dot{\theta} \ \dot{\psi} \ ]^\mathrm{T}$ are the time derivatives of Euler angles roll, pitch and yaw respectively.
+
+
+\subsection{Attitude and Altitude Control Based on LQI Control}
+As described in previous work\cite{Zhao2016}, the dynamics of the model can be integrated into the simultaneous equations as follows:
+\begin{equation}
+  \bm{\ddot{y}} = P\bm{u}-\bm{G}  
+\end{equation}
+\begin{equation*}
+  \bm{y}=[ \ z \ \varphi \ \theta \ \psi \ ]^\mathrm{T}; \ \bm{u}=[ \ F_1 \ \cdots \ F_N \ ]^\mathrm{T}; \ \bm{G}=[ \ g \ 0 \ 0 \ 0 \ ]^\mathrm{T}
+\end{equation*}
+Note that matrix $P$ represents the configuration of the multilinks, including the arrangement of the propellers. It is significant that matrix $P$ is not constant for the transformable multirotor while that is constant for conventional aerial robots. 
+\begin{equation}
+  P = [ \ \bm{\mathrm{p}}_z \ \bm{\mathrm{p}}_x \ \bm{\mathrm{p}}_y \ \bm{\mathrm{p}}_c \ ]^\mathrm{T}
+  \label{eq:P}
+\end{equation}
+\begin{equation*}
+    \bm{\mathrm{p}}_z=[ \ \bar{m}_1 \ \cdots \ \bar{m}_N \ ]^\mathrm{T}; \ \bm{\mathrm{p}}_x=[ \ \bar{x}_1 \ \cdots \ \bar{x}_N \ ]^\mathrm{T}; 
+\end{equation*}
+\begin{equation*}
+    \bm{\mathrm{p}}_y=[ \ \bar{y}_1 \ \cdots \ \bar{y}_N \ ]^\mathrm{T}; \ \bm{\mathrm{p}}_c=[ \ \bar{c}_1 \ \cdots \ \bar{c}_N \ ]^\mathrm{T};
+\end{equation*}
+\begin{equation*}
+    \bar{x}_i=\frac{-x_i}{I_{multi_yy}}, \ \bar{y}_i=\frac{y_i}{I_{multi_xx}}, \ \bar{c}_i=\frac{c_i}{I_{multi_zz}}, \ \bar{m}_i=\frac{1}{M}
+\end{equation*}
+We introduce the following state equation for linear-quadratic-integral(LQI) system about attitude and altitude control with the new state($\bm{x}=[ \ z \ \dot{z} \ \varphi \ \dot{\varphi} \ \theta \ \dot{\theta} \ \psi \ \dot{\psi} \ ]^\mathrm{T}$).
+\begin{equation}
+  \dot{\bm{x}}=A\bm{x}+B\bm{u}+\bm{d}
+  \label{eq:state_eq}
+\end{equation}
+\begin{equation}
+  \bm{y}=C\bm{x}
+  \label{eq:observation_eq}
+\end{equation}
+\begin{equation*}
+  \bm{x} \in  R^8, \ \bm{u} \in R^N, \ \bm{y} \in R^4, \ \bm{d} \in R^8
+\end{equation*}
+where 
+\begin{eqnarray*}
+  A&=&
+  \begin{bmatrix}
+    0 &1 &0 &0 &0 &0 &0 &0\\
+    0 &0 &0 &0 &0 &0 &0 &0\\
+    0 &0 &0 &1 &0 &0 &0 &0\\
+    0 &0 &0 &0 &0 &0 &0 &0\\
+    0 &0 &0 &0 &0 &1 &0 &0\\
+    0 &0 &0 &0 &0 &0 &0 &0\\
+    0 &0 &0 &0 &0 &0 &0 &1\\
+    0 &0 &0 &0 &0 &0 &0 &0
+  \end{bmatrix}\\
+  B&=&[\bm{0} \ \bm{p}_z \ \bm{0} \ \bm{p}_x \ \bm{0} \ \bm{p}_y \ \bm{0} \ \bm{p}_c]^\mathrm{T}\\
+  C&=&
+  \begin{bmatrix}
+    1 &0 &0 &0 &0 &0 &0 &0\\
+    0 &0 &1 &0 &0 &0 &0 &0\\
+    0 &0 &0 &0 &1 &0 &0 &0\\
+    0 &0 &0 &0 &0 &0 &1 &0
+  \end{bmatrix}
+\end{eqnarray*}
+
+In \equref{state_eq} $\sim$ \equref{observation_eq}, $\bm{u}$ and $\bm{y}$ are the input and output of the control system, while
+\scalebox{0.8}{$\mbox{\boldmath $d$} =  \left[
+  \begin{array}{cccccccc}
+    0&-g&0&0&0&0&0&0 \\
+    \end{array}
+  \right]^{\mathrm{T}} $}
+can be regarded as constant noise in the control system. 
+\par
+We extend the state equation by modifying the state and input as follows:
+\begin{equation}
+  \tilde{\bm{x}} \equiv \bm{x}-\bm{x}_s; \ \tilde{\bm{u}} \equiv \bm{u}-\bm{u}_s 
+\end{equation}
+where $\bm{x}_s$ and $\bm{u}_s$ are the final values at the steady state.
+\par
+We also introduce a tracking error between the reference input and the system output $e$ and the integral value $v$ as follows: 
+\begin{equation}
+  \dot{\bm{v}}=\bm{e}=\bm{r}-\bm{y}=C\bm{x_s}-C\bm{x}=-C\tilde{\bm{x}}
+\end{equation}
+\par
+Based on the extended state equation(\equref{extended_state_eq}), we design a cost function given by Eq. \equref{cost_function}.
+
+\begin{equation}
+  \dot{\bar{\bm{x}}}=\bar{A}\bar{\bm{x}}+\bar{B}\tilde{\bm{u}}
+  \label{eq:extended_state_eq}
+\end{equation}
+\begin{eqnarray*}
+  \bar{\bm{x}}=
+  \begin{bmatrix}
+    \tilde{\bm{x}}\\
+    \bm{v}
+  \end{bmatrix};\ \
+  \bar{A}=
+  \begin{bmatrix}
+    A &O_{8,4}\\
+    -C &O_{4,4}
+  \end{bmatrix};\ \
+  \bar{B}=
+  \begin{bmatrix}
+    B\\
+    O_{4,N}
+  \end{bmatrix}
+\end{eqnarray*}
+
+\begin{equation}
+  J=\int^{\infty}_0 (\bar{\bm{x}}^\mathrm{T}Q\bar{\bm{x}}+\tilde{\bm{u}}^\mathrm{T}R\tilde{\bm{u}})dt
+  \label{eq:cost_function}
+\end{equation}
+
+where $Q$ and $R$ are the gain matrices to determine the influence on the convergence characteristics of the control system. 
+\par
+Finally we can retrieve the optimal feedback gain from Eq. \equref{extended_state_eq} and Eq. \equref{cost_function} arrcoding to the general LQ theory\cite{Young}.
+
+\subsection{Position Control in the Horizontal Plane}
+positions control in the $x$ and $y$ planes use the roll and pitch angles as inputs, and the translational accelerations $\ddot{x}$ and $\ddot{y}$ are a consequence of pitch $\theta$ and roll $\varphi$ tilt. The desired accelerations $\ddot{x}^{des}$ and $\ddot{y}^{des}$ are calculated from a general PID controller described in previous work\cite{Zhao2014}:
+\begin{equation}
+  \scalebox{0.8}{$\displaystyle
+  \ddot{r}^{des}_{CoG}=k_P(r^{des}_{CoG}-r_{CoG})+k_I\int(r^{des}_{CoG}-r_{CoG})d\tau+k_D(\dot{r}^{des}_{CoG}-\dot{r}_{CoG})$}
+\end{equation}
+where the PID gains($k_P$, $k_I$, $k_D$) are adjusted to achieve the stable hovering position control.

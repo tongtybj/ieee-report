@@ -16,25 +16,26 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{times}
+\usepackage{bm}
 %
-\newcommand{\figref}[1]{Fig.\ref{figure:#1}}
+\newcommand{\figref}[1]{Fig. \ref{figure:#1}}
 \newcommand{\tabref}[1]{Table \ref{table:#1}}
+\newcommand{\equref}[1]{Eq. \ref{eq:#1}}
 \newcommand{\argmax}{\operatornamewithlimits{argmax}}
 \newcommand{\argmin}{\operatornamewithlimits{argmin}}
 
 \title{\LARGE \bf
-Preparation of Papers for IEEE Sponsored Conferences \& Symposia*
+  Form Optimization Control for Multiple Objects Transportation by Transformable Multirotor with Two-dimensional Multilinks
 }
 
 
-\author{Albert Author$^{1}$ and Bernard D. Researcher$^{2}$% <-this % stops a space
-\thanks{*This work was not supported by any organization}% <-this % stops a space
-\thanks{$^{1}$Albert Author is with Faculty of Electrical Engineering, Mathematics and Computer Science,
-        University of Twente, 7500 AE Enschede, The Netherlands
-        {\tt\small albert.author@papercept.net}}%
-\thanks{$^{2}$Bernard D. Researcheris with the Department of Electrical Engineering, Wright State University,
-        Dayton, OH 45435, USA
-        {\tt\small b.d.researcher@ieee.org}}%
+\author{Tomoki Anzai$^{1}$, Moju Zhao$^{1}$, Xiangyu Chen$^{1}$, Fan Shi$^{1}$, Koji Kawasaki$^{1}$, Kei Okada$^{1}$, Masayuki Inaba$^{1}$% <-this % stops a space
+%\thanks{*This work was not supported by any organization}% <-this % stops a space
+\thanks{$^{1}$T. Anzai, M. Zhao, X. Chen, F. Shi, K. Kawasaki, K. Okada and M. Inaba are with Department of Mechano-Informatics, The University of Tokyo, 7-3-1 Hongo, Bunkyo-Ku, Tokyo 113-8656, Japan
+       {\tt\small anzai at jsk.t.u-tokyo.ac.jp}}%
+%\thanks{$^{2}$Bernard D. Researcheris with the Department of Electrical Engineering, Wright State University,
+%        Dayton, OH 45435, USA
+%        {\tt\small b.d.researcher@ieee.org}}%
 }
 
 
@@ -49,9 +50,11 @@ Preparation of Papers for IEEE Sponsored Conferences \& Symposia*
 \end{abstract}
 
 \input src/intro.tex
-\input src/procedure.tex
-\input src/math.tex
-\input src/howto.tex
+\input src/approaches.tex
+\input src/flight_control.tex
+\input src/optimization.tex
+\input src/system.tex
+\input src/experiments.tex
 \input src/conclusion.tex
 
 \addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
@@ -61,8 +64,8 @@ Preparation of Papers for IEEE Sponsored Conferences \& Symposia*
                                   % so it should come on the page before the last. Make
                                   % sure that you do not shorten the textheight too much.
 
-\input src/appendix.tex
-\input src/acknowledge.tex
+%\input src/appendix.tex
+%\input src/acknowledge.tex
 
 \bibliographystyle{junsrt}
 \bibliography{main}
