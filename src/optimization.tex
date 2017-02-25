@@ -59,7 +59,7 @@ We then use the indices to validate the state in terms of the distance of pitch/
 \begin{equation}
   \begin{split}
   %\text{\it{Validator_{dist}}}(\text{\it{State}}(\bm{\theta}))=\\                                                                                                        
-  Validator_{dist}(\text{\it{State}}(\bm{\theta}))= \hspace{0.4\columnwidth} \\
+  \text{\it{Validator}}_{dist}(\text{\it{State}}(\bm{\theta}))= \hspace{0.4\columnwidth} \\
   \begin{cases}
   \text{\it{Valid}} \hspace{0.2\columnwidth}(d_x(\text{\it{State}}(\bm{\theta})) >= \text{\it{Threshold}} \\
   \hspace{0.2\columnwidth} \text{\it{AND}} \ d_y(\text{\it{State}}(\bm{\theta})) >= \text{\it{Threshold}})\\
@@ -76,7 +76,7 @@ The target state will be validated as an invalid state, if either of the two ind
   \begin{center}
     \includegraphics[width=1.0\columnwidth]{figs/invalid_forms.pdf}
   \end{center}
-  \caption{Invalid forms.\label{figure:invalid_forms}}
+  \caption{(a): Self-collision form($\theta_1=\theta_2=\theta_4=\theta_5=\frac{\pi}{2}$[rad], $\theta_3=0.55$[rad]). (b):Singular form($\theta_1=\theta_3=\theta_5=\frac{\pi}{2}$[rad], $\theta_2=\theta_4=-\frac{\pi}{2}$[rad]). (c):Invalid form based on roll/pitch moment($\theta_1=\theta_5=0.80$[rad], $\theta_2=\theta_4=0.57$[rad], $\theta_3=-\frac{\pi}{2}$[rad]).\label{figure:invalid_forms}}
 \end{figure}
 
 \begin{figure}[t]
@@ -122,7 +122,7 @@ Then, setting parameters of gradient descent as shown in \tabref{optimization_pa
 \begin{figure}[t]
   \begin{center}
     \includegraphics[width=0.8\columnwidth]{figs/optimization_result.pdf}
-    \caption{The optimized forms of each case with steepest descent.\label{figure:optimization_result}}
+    \caption{The optimized forms of each case with gradient descent: the values under each form is the final value of $V(\bm{u})$. \label{figure:optimization_result}}
   \end{center}
   
 \end{figure}
