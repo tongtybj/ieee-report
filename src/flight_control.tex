@@ -130,7 +130,7 @@ We also introduce a tracking error between the reference input and the system ou
   \dot{\bm{v}}=\bm{e}=\bm{r}-\bm{y}=C\bm{x_s}-C\bm{x}=-C\tilde{\bm{x}}
 \end{equation}
 \par
-Based on the extended state equation(\equref{extended_state_eq}), we design a cost function given by Eq. \equref{cost_function}.
+Based on the extended state equation(\equref{extended_state_eq}), we design a cost function given by \equref{cost_function}.
 
 \begin{equation}
   \dot{\bar{\bm{x}}}=\bar{A}\bar{\bm{x}}+\bar{B}\tilde{\bm{u}}
@@ -161,7 +161,7 @@ Based on the extended state equation(\equref{extended_state_eq}), we design a co
 
 where $Q$ and $R$ are the gain matrices to determine the influence on the convergence characteristics of the control system. 
 \par
-Finally we can retrieve the optimal feedback gain from Eq. \equref{extended_state_eq} and Eq. \equref{cost_function} arrcoding to the general LQ theory\cite{Young}.
+Finally we can retrieve the optimal feedback gain from \equref{extended_state_eq} and \equref{cost_function} according to the general LQ theory\cite{Young}.
 
 \subsection{Position Control in the Horizontal Plane}
 positions control in the $x$ and $y$ planes use the roll and pitch angles as inputs, and the translational accelerations $\ddot{x}$ and $\ddot{y}$ are a consequence of pitch $\theta$ and roll $\varphi$ tilt. The desired accelerations $\ddot{x}^{des}$ and $\ddot{y}^{des}$ are calculated from a general PID controller described in previous work\cite{Zhao2014}:
