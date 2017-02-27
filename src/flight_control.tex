@@ -24,7 +24,7 @@ We assume that the multilinks act as a single rigid body at each time point, sin
 
 \begin{equation}
   \scalebox{0.9}{$
-  I_{multilink}
+  I_{multilinks}
   \begin{bmatrix}
     \dot{w_x} \\
     \dot{w_y} \\
@@ -42,7 +42,7 @@ We assume that the multilinks act as a single rigid body at each time point, sin
     w_y \\
     w_z
   \end{bmatrix}
-  \times I_{multilink}
+  \times I_{multilinks}
   \begin{bmatrix}
     w_x \\
     w_y \\
@@ -51,7 +51,7 @@ We assume that the multilinks act as a single rigid body at each time point, sin
   $}
   \label{eq:rotation_motioneq}
 \end{equation}
-where $\bm{r}_{CoG}$ and $I_{multilink}$ are the positions of the center of mass and the principal moment of inertia respectively. $[ \ w_x \ w_y \ w_z \ ]^\mathrm{T}$ is the vector of the angular velocity of the multilink ,while $[ \ \dot{\varphi} \ \dot{\theta} \ \dot{\psi} \ ]^\mathrm{T}$ are the time derivatives of Euler angles roll, pitch and yaw respectively.
+where $\bm{r}_{CoG}$ and $I_{multilink}$ are the positions of the center of mass and the principal moment of inertia respectively. $[ \ w_x \ w_y \ w_z \ ]^\mathrm{T}$ is the vector of the angular velocity of the multilinks ,while $[ \ \dot{\varphi} \ \dot{\theta} \ \dot{\psi} \ ]^\mathrm{T}$ are the time derivatives of Euler angles roll, pitch and yaw respectively.
 
 
 \subsection{Attitude and Altitude Control Based on LQI Control}
@@ -125,7 +125,7 @@ We extend the state equation by modifying the state and input as follows:
 \end{equation}
 where $\bm{x}_s$ and $\bm{u}_s$ are the final values at the steady state.
 \par
-We also introduce a tracking error between the reference input and the system output $e$ and the integral value $v$ as follows: 
+We also introduce a tracking error between the reference input and the system output $\bm{e}$ and the integral value $\bm{v}$ as follows: 
 \begin{equation}
   \dot{\bm{v}}=\bm{e}=\bm{r}-\bm{y}=C\bm{x_s}-C\bm{x}=-C\tilde{\bm{x}}
 \end{equation}
