@@ -2,12 +2,14 @@
 \subsection{Optimal Form Based on Flight Stability}
 The dynamics of the model is described is \equref{P}. Therefore, when the control system is at steady state, the control model can be written as follows:
 \begin{equation}
-  P(\bm{\theta})\bm{u}=\bm{G}
+  P(\bm{\theta}, m_{obj}, \bm{r}_{obj})\bm{u}=\bm{G}
   \label{eq:steady_state}
 \end{equation}
+where $\bm{\theta}$, $m_{obj}$ and $\bm{r}_{obj}$ denotes the angle vector of joints ($\theta_1, \cdots, \theta_N$), the mass and the position of a object which the multirotor grasps respectively to emphasize that matrix $P$ is influenced by them.
+\par
 When any element in $\bm{u}$ exceeds the range of lifting forces, the flight control is unstable. Although all elements of $\bm{u}$ fall within the range of forces, any one of them can exceed the range of forces when it is close to the upper limit of forces due to the flight control and disturbance. Hence, the most stable state is that all elements of $\bm{u}$ are equal since the sum of $\bm{u}$ equal to $MG$ which is constant at the steady state. This is written as:
 \begin{equation}
-  \text{min} V(\bm{u}) \ \text{subject to} \ P(\bm{\theta})\bm{u}=\bm{G}
+  \text{min} V(\bm{u}) \ \text{subject to} \ P\bm{u}=\bm{G}
   \label{eq:optimization}
 \end{equation}
 where the function $V(x)$ is used to calculate the variance of elements of $x$. 
@@ -22,7 +24,7 @@ Note that $E(\bm{u})^2$ is a constant term since the sum of $\bm{u}$ is equal to
 \par
 Hence, the problem in \equref{optimization} can be redefined as:
 \begin{equation}
-  \text{min}\bm{u}^\mathrm{T}\bm{u} \ \text{subject to} \ P(\bm{\theta})\bm{u}=\bm{G}
+  \text{min}\bm{u}^\mathrm{T}\bm{u} \ \text{subject to} \ P\bm{u}=\bm{G}
   \label{eq:optimization2}
 \end{equation}
 When $N=4$ and P is full rank, \equref{steady_state} can be solved as $\bm{u}=P^{-1}\bm{G}$. However, for a system with more than four links, a null space occurs, resulting in an infinite solution for $\bm{u}$. In this case, we use Lagrange multiplier to obtain least-norm solution of $\bm{u}$ since the purpose is to minimize the norm of $\bm{u}$ as shown in \equref{optimization2}. 
@@ -34,13 +36,14 @@ The Lagrange multiplier can be written as:
 \end{equation}
 
 \subsection{Constraints of Form of Multilinks}
- Although the optimal form can be obtained as described in \equref{optimization2}, the solution can be invalid. Therefore, the solution must satisfy constraints for avoidance of invalid forms. Five constraints are shown as follows.
+ Even though the optimal form can be obtained as described in \equref{optimization2}, the solution can be invalid. Therefore, the solution must satisfy constraints to avoid invalid forms. Five constraints are shown as follows.
 \subsubsection{Joint Angle Limit}
 In this work, the rotation range of each joint is $-\frac{\pi}{2}$[rad] $\sim$ $\frac{\pi}{2}$[rad]. The joint angles must be changed in this range since a command of joint angle which is out of this range does not make sense.
 \subsubsection{Self-Collision}
 Although the joint angles are in the range, self-collision can occur as shown in \figref{invalid_forms}(a). Therefore, collision detection is necessary to avoid self-collision.
 \subsubsection{Rank of P}
-According to \equref{P}, if $P$ has full rank, the mapping is surjective, indicating that the four elements in $\bm{y} \ (z,\varphi, \theta, \psi)$ are dependent of each other. In contrast, if $P$ is not of full rank, the four elements can not act independently, leading to an uncontrollable result. We call the resulting special form the singular form(\figref{invalid_forms}(b)).The rank of P can be calculated by checking the linear combination of row vectors $(\bm{\mathrm{p}}_z , \bm{\mathrm{p}}_x , \bm{\mathrm{p}}_y , \bm{\mathrm{p}}_c )$. It is evident that $\bm{\mathrm{p}}_z$ and $\bm{\mathrm{p}}_c$ are linearly independent, and the linear independence of the two group ($\{\bm{\mathrm{p}}_z, \bm{\mathrm{p}}_x , \bm{\mathrm{p}}_y \}$ and $\{\bm{\mathrm{p}}_c , \bm{\mathrm{p}}_x , \bm{\mathrm{p}}_y \}$) must be checked. When the multirotor is under the singular form, its control system is asymptotically unstable.
+According to \equref{P}, if $P$ has full rank, the mapping is surjective, indicating that the four elements in $\bm{y} \ (z,\varphi, \theta, \psi)$ are dependent of each other. In contrast, if $P$ is not of full rank, the four elements can not act independently, leading to an uncontrollable result. We call the resulting special form the singular form(\figref{invalid_forms}(b)).The rank of P can be calculated by checking the linear combination of row vectors $(\bm{\mathrm{p}}_z , \bm{\mathrm{p}}_x , \bm{\mathrm{p}}_y , \bm{\mathrm{p}}_c )$. %It is evident that $\bm{\mathrm{p}}_z$ and $\bm{\mathrm{p}}_c$ are linearly independent, and the linear independence of the two group ($\{\bm{\mathrm{p}}_z, \bm{\mathrm{p}}_x , \bm{\mathrm{p}}_y \}$ and $\{\bm{\mathrm{p}}_c , \bm{\mathrm{p}}_x , \bm{\mathrm{p}}_y \}$) must be checked. 
+When the multirotor is under the singular form, its control system is asymptotically unstable.
 \subsubsection{Lifting Force Range}
 Lifting force which is generated by the propeller has the range. In the case of our own machine, the range of lifting force is (0[N]$\sim$16.5[N]). All elements of the input vector $\bm{u}$ in \equref{P_inv} must fall within this range of forces.
 \subsubsection{Distance from Each Propeller to the Rotational Axis}
@@ -72,14 +75,15 @@ We then use the indices to validate the state in terms of the distance of pitch/
 \par
 The target state will be validated as an invalid state, if either of the two indices fall below the threshold. The form shown in \figref{invalid_forms}(c) is an example of an invalid state.
 
-\begin{figure}[t]
+\begin{figure}[th]
   \begin{center}
     \includegraphics[width=1.0\columnwidth]{figs/invalid_forms.pdf}
   \end{center}
-  \caption{(a): Self-collision form($\theta_1=\theta_2=\theta_4=\theta_5=\frac{\pi}{2}$[rad], $\theta_3=0.55$[rad]). (b):Singular form($\theta_1=\theta_3=\theta_5=\frac{\pi}{2}$[rad], $\theta_2=\theta_4=-\frac{\pi}{2}$[rad]). (c):Invalid form based on roll/pitch moment($\theta_1=\theta_5=0.80$[rad], $\theta_2=\theta_4=0.57$[rad], $\theta_3=-\frac{\pi}{2}$[rad]).\label{figure:invalid_forms}}
+  \caption{Examples of invalid forms. \newline
+(a): Self-collision form($\theta_1=\theta_2=\theta_4=\theta_5=\frac{\pi}{2}$[rad], $\theta_3=0.55$[rad]). \newline (b): Singular form($\theta_1=\theta_3=\theta_5=\frac{\pi}{2}$[rad], $\theta_2=\theta_4=-\frac{\pi}{2}$[rad]). \newline (c): Invalid form based on roll/pitch moment($\theta_1=\theta_5=0.80$[rad], $\theta_2=\theta_4=0.57$[rad], $\theta_3=-\frac{\pi}{2}$[rad]).\label{figure:invalid_forms}}
 \end{figure}
 
-\begin{figure}[t]
+\begin{figure}[th]
   \begin{center}
     \includegraphics[width=0.9\columnwidth]{figs/dynamic_model.pdf}
     \caption{The dynamic model of the quadrotor prototype described in coordinate frame $\{CoG\}$. $F_i$ and $T_i$ denote the lifting force and torque generated by each propeller, respectively. $[x_i, y_i]$ is the location of each propeller in the frame of $\{CoG\}$.\label{figure:dynamic_model}}
@@ -104,7 +108,7 @@ where $\Delta \theta$ and $\Delta \bm{\theta_i}$ are infinitesimal angle and col
 \par
 Then, setting parameters of gradient descent as shown in \tabref{optimization_params}, we perform optimization calculation on four conditions shown in \figref{optimization_result}. In \figref{optimization_result}(a) $\sim$ \figref{optimization_result}(d), the orange circle indicates the position of the additional mass(0.5[kg]) while the red circle and the blue, green arrows indicate the position of CoG and principal axes of inertia, respectively. According to the final values of $V(\bm{u})$ shown under each form, it is evident that the optimization is fully performed and optimal forms can be obtained by this method.
 
-\begin{table}[tb]
+\begin{table}[th]
  \caption{Parameters of gradient descent.}
  \label{table:optimization_params}
  \centering
@@ -119,7 +123,7 @@ Then, setting parameters of gradient descent as shown in \tabref{optimization_pa
  \end{tabular}
 \end{table}
 
-\begin{figure}[t]
+\begin{figure}[H]
   \begin{center}
     \includegraphics[width=0.8\columnwidth]{figs/optimization_result.pdf}
     \caption{The optimized forms of each case with gradient descent: the values under each form is the final value of $V(\bm{u})$. \label{figure:optimization_result}}

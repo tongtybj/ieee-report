@@ -17,6 +17,7 @@
 \usepackage{algpseudocode}
 \usepackage{times}
 \usepackage{bm}
+\usepackage{here}
 %
 \newcommand{\figref}[1]{Fig. \ref{figure:#1}}
 \newcommand{\tabref}[1]{Table \ref{table:#1}}
@@ -24,8 +25,17 @@
 \newcommand{\argmax}{\operatornamewithlimits{argmax}}
 \newcommand{\argmin}{\operatornamewithlimits{argmin}}
 
+%\setcounter{topnumber}{100}
+%\setcounter{bottomnumber}{100}
+%\setcounter{totalnumber}{100}
+%\renewcommand{\textfraction}{0.0}
+%\renewcommand{\topfraction}{1.0}
+
+
 \title{\LARGE \bf
-  Form Optimization Control for Multiple Objects Transportation by Transformable Multirotor with Two-dimensional Multilinks
+  %Form Optimization Control for Multiple Objects Transportation by Transformable Multirotor with Two-dimensional Multilinks
+  %Form Optimization Control for Multiple Objects Transportation by Multilinked Multirotor with Internal Communication System
+  Multilinked Multirotor with Internal Communication System for Multiple Objects Transportation based on Form Optimization Control
 }
 
 
@@ -52,8 +62,8 @@
 \input src/intro.tex
 \input src/approaches.tex
 \input src/flight_control.tex
-\input src/optimization.tex
 \input src/system.tex
+\input src/optimization.tex
 \input src/experiments.tex
 \input src/conclusion.tex
 
@@ -66,8 +76,13 @@
 
 %\input src/appendix.tex
 %\input src/acknowledge.tex
-
 \bibliographystyle{junsrt}
 \bibliography{main}
-
+%\begin{figure}[b]                                                                       
+%  \begin{center}                                                                        
+%    \includegraphics[width=1.0\columnwidth]{figs/experiment.pdf}                        
+%  \end{center}                                                                          
+%  \caption{Experiment of multiple objects transportation: two ferrous objects are grasped and transported by the transformable aerial robot.\label{figure:experiment}}          
+%\end{figure}
+      
 \end{document}
