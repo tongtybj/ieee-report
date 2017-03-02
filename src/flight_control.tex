@@ -51,7 +51,7 @@ We assume that the multilinks act as a single rigid body at each time point, sin
   $}
   \label{eq:rotation_motioneq}
 \end{equation}
-where $\bm{r}_{CoG}$ and $I_{multilink}$ are the positions of the center of mass and the principal moment of inertia respectively. $[ \ w_x \ w_y \ w_z \ ]^\mathrm{T}$ is the vector of the angular velocity of the multilinks ,while $[ \ \dot{\varphi} \ \dot{\theta} \ \dot{\psi} \ ]^\mathrm{T}$ are the time derivatives of Euler angles roll, pitch and yaw respectively.
+where $\bm{r}_{CoG}$ and $I_{multilinks}$ are the CoG position and the principal moment of inertia respectively. $[ \ w_x \ w_y \ w_z \ ]^\mathrm{T}$ is the vector of the angular velocity of the multilinks ,while $[ \ \dot{\varphi} \ \dot{\theta} \ \dot{\psi} \ ]^\mathrm{T}$ are the time derivatives of Euler angles roll, pitch and yaw respectively.
 
 
 \subsection{Attitude and Altitude Control Based on LQI Control}
@@ -76,7 +76,8 @@ Note that matrix $P$ represents the configuration of the multilinks, including t
 \begin{equation*}
     \bar{x}_i=\frac{-x_i}{I_{multi_yy}}, \ \bar{y}_i=\frac{y_i}{I_{multi_xx}}, \ \bar{c}_i=\frac{c_i}{I_{multi_zz}}, \ \bar{m}_i=\frac{1}{M}
 \end{equation*}
-We introduce the following state equation for linear-quadratic-integral(LQI) system about attitude and altitude control with the new state($\bm{x}=[ \ z \ \dot{z} \ \varphi \ \dot{\varphi} \ \theta \ \dot{\theta} \ \psi \ \dot{\psi} \ ]^\mathrm{T}$).
+We introduce the following state equation for linear-quadratic-integral(LQI) system\cite{Young}
+ about attitude and altitude control with the new state($\bm{x}=[ \ z \ \dot{z} \ \varphi \ \dot{\varphi} \ \theta \ \dot{\theta} \ \psi \ \dot{\psi} \ ]^\mathrm{T}$).
 \begin{equation}
   \dot{\bm{x}}=A\bm{x}+B\bm{u}+\bm{d}
   \label{eq:state_eq}
@@ -161,7 +162,32 @@ Based on the extended state equation(\equref{extended_state_eq}), we design a co
 
 where $Q$ and $R$ are the gain matrices to determine the influence on the convergence characteristics of the control system. 
 \par
-Finally we can retrieve the optimal feedback gain from \equref{extended_state_eq} and \equref{cost_function} according to the general LQ theory\cite{Young}.
+The optimal input $\bm{u}_0$ which provides the minimum cost can be obtained by solving the algebraic Riccati equation (ARE) of \equref{riccati}.
+
+\begin{equation}
+  \bar{A}^\mathrm{T}\Pi+\Pi\bar{A}+Q-\Pi\bar{B}R^{-1}\bar{B}^\mathrm{T}\Pi=0
+  \label{eq:riccati}
+\end{equation}
+\begin{equation}
+  K\equiv [K_1 \ K_2]=-R^{-1}\bar{B}^\mathrm{T}\Pi 
+\end{equation}
+\begin{equation}
+  \tilde{\bm{u}}_0=K\bar{\bm{x}}
+  \label{eq:optimal_input}
+\end{equation}
+Substituting $\bar{\bm{x}}$ into \equref{optimal_input} yields:
+\begin{equation}
+  \bm{u}_0=K_1\bm{x}+K_2\bm{v}-K_1\bm{x}_s+\bm{u}_s
+  \label{eq:optimal_input_substitute}
+\end{equation}
+Here, the last two terms are the feed-forward part, the first of which improves the trackability to the reference input, and the second of which improves the convergence rate to the steady state. In our work, we neglect the term $\bm{u}_s$ as the two feedback terms already guarantee the asymptotic stability. Hence, the final input strategy for the attitude and altitude control system is derived as follows:
+\begin{eqnarray}
+  \bm{u}_0&=&K_1\bm{x}+K_2\bm{v}+N\bm{r}
+  \label{eq:optimal_input_modified}\\
+  N&=&-K_1C^\mathrm{T}
+\end{eqnarray}
+
+
 
 \subsection{Position Control in the Horizontal Plane}
 positions control in the $x$ and $y$ planes use the roll and pitch angles as inputs, and the translational accelerations $\ddot{x}$ and $\ddot{y}$ are a consequence of pitch $\theta$ and roll $\varphi$ tilt. The desired accelerations $\ddot{x}^{des}$ and $\ddot{y}^{des}$ are calculated from a general PID controller described in previous work\cite{Zhao2014}:

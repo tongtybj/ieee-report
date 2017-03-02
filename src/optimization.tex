@@ -91,7 +91,8 @@ The target state will be validated as an invalid state, if either of the two ind
 \end{figure}
 
 \subsection{Optimal Form Based on Gradient Descent}
-To determine the joint angle vector $\bm{\theta}$ which minimizes $\bm{u}^\mathrm{T}\bm{u}$(\equref{optimization2}, \equref{P_inv}), we apply gradient descent(steepest descent)\cite{OZEKI2003}. In gradient descent, the joint angle vector $\bm{\theta}$ is updated as follows:
+In this section, we utilize the hex-rotor model which possesses five joints. Various methods which determine the joint angle vector $\bm{\theta}$ which minimizes $\bm{u}^\mathrm{T}\bm{u}$(\equref{optimization2}, \equref{P_inv}) are considered. Full search method\cite{ZhaoICRA2017} can be considered as one of the methods, but explosion of combination is assumed to occur due to the five joints. Therefore, we apply gradient descent(steepest descent)\cite{OZEKI2003}.
+ In gradient descent, the joint angle vector $\bm{\theta}$ is updated as follows:
 \begin{equation}
   \bm{\theta}^{(k+1)} = \bm{\theta}^{(k)}-\alpha \ \text{grad}(F(\bm{\theta}^{(k)}))
   \label{eq:steepest_descent_method}
@@ -123,7 +124,7 @@ Then, setting parameters of gradient descent as shown in \tabref{optimization_pa
  \end{tabular}
 \end{table}
 
-\begin{figure}[H]
+\begin{figure}[th]
   \begin{center}
     \includegraphics[width=0.8\columnwidth]{figs/optimization_result.pdf}
     \caption{The optimized forms of each case with gradient descent: the values under each form is the final value of $V(\bm{u})$. \label{figure:optimization_result}}

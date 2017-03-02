@@ -13,12 +13,12 @@
 \graphicspath{{figs/}}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-\usepackage{times}
+%\usepackage{algorithm}
+%\usepackage{algpseudocode}
+%\usepackage{times}
 \usepackage{bm}
-\usepackage{here}
-%
+%\usepackage{here}
+
 \newcommand{\figref}[1]{Fig. \ref{figure:#1}}
 \newcommand{\tabref}[1]{Table \ref{table:#1}}
 \newcommand{\equref}[1]{Eq. \ref{eq:#1}}
@@ -76,13 +76,17 @@
 
 %\input src/appendix.tex
 %\input src/acknowledge.tex
-\bibliographystyle{junsrt}
-\bibliography{main}
-%\begin{figure}[b]                                                                       
-%  \begin{center}                                                                        
-%    \includegraphics[width=1.0\columnwidth]{figs/experiment.pdf}                        
-%  \end{center}                                                                          
-%  \caption{Experiment of multiple objects transportation: two ferrous objects are grasped and transported by the transformable aerial robot.\label{figure:experiment}}          
-%\end{figure}
-      
+
+
+\begin{figure}[h]                                                                       
+  \begin{center}                                                                        
+    \includegraphics[width=1.0\columnwidth]{figs/experiment.pdf}                        
+  \end{center}                                                                          
+  \caption{Experiment of multiple objects transportation: two ferrous objects are grasped and transported by the transformable aerial robot. Lower left: the result of detection by onboard camera. \label{figure:experiment}}          
+\end{figure}
+
+%\bibliographystyle{junsrt}
+%\bibliography{main}
+\input ./main_saved.bbl     
+
 \end{document}
