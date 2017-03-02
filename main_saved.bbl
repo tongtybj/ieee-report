@@ -1,0 +1,101 @@
+\begin{thebibliography}{10}
+\samepage
+\bibitem{Kumar2012}
+Vijay Kumar and Nathan Michael.
+\newblock Opportunities and challenges with autonomous micro aerial vehicles.
+\newblock {\em The International Journal of Robotics Research}, Vol.~31,
+  No.~11, pp. 1279--1291, 2012.
+
+\bibitem{surveillance}
+Lefteris Doitsidis, Stephan Weiss, Alessandro Renzaglia, Markus~W. Achtelik,
+  Elias Kosmatopoulos, Roland Siegwart, and Davide Scaramuzza.
+\newblock Optimal surveillance coverage for teams of micro aerial vehicles in
+  gps-denied environments using onboard vision.
+\newblock {\em Autonomous Robots}, Vol.~33, No.~1, pp. 173--188, 2012.
+
+\bibitem{rescue}
+Markus Bernard, Konstantin Kondak, Ivan Maza, and Anibal Ollero.
+\newblock Autonomous transportation and deployment with aerial robots for
+  search and rescue missions.
+\newblock {\em Journal of Field Robotics}, Vol.~28, No.~6, pp. 914--931, 2011.
+
+\bibitem{lindsey2012}
+Quentin Lindsey, Daniel Mellinger, and Vijay Kumar.
+\newblock Construction with quadrotor teams.
+\newblock {\em Autonomous Robots}, Vol.~33, No.~3, pp. 323--336, 2012.
+
+\bibitem{Mellinger2011}
+D.~Mellinger, Q.~Lindsey, M.~Shomin, and V.~Kumar.
+\newblock Design, modeling, estimation and control for aerial grasping and
+  manipulation.
+\newblock In {\em 2011 IEEE/RSJ International Conference on Intelligent Robots
+  and Systems}, pp. 2668--2673, 2011.
+
+\bibitem{ZhaoISER2016}
+{\em Transformable Multirotor with Two-dimensional Multilinks: Modeling,
+  Control, and Whole-body Aerial Manipulation}, 2016.
+
+\bibitem{ZhaoICRA2017}
+{\em Whole-body Aerial Manipulation by Transformable Multirotor with
+  Two-dimensional Multilinks}, 2017.
+
+\bibitem{Bernard2009}
+M.~Bernard and K.~Kondak.
+\newblock Generic slung load transportation system using small size
+  helicopters.
+\newblock In {\em 2009 IEEE International Conference on Robotics and
+  Automation}, pp. 3258--3264, 2009.
+
+\bibitem{Hugh2012}
+Hugh Durrant-Whyte, Nicholas Roy, and Pieter Abbeel.
+\newblock {\em Construction of Cubic Structures with Quadrotor Teams}, pp.
+  177--184.
+\newblock MIT Press, 2012.
+
+\bibitem{Zhao2016}
+Moju Zhao, Koji Kawasaki, Kei Okada, and Masayuki Inaba.
+\newblock Transformable multirotor with two-dimensional multilinks: modeling,
+  control, and motion planning for aerial transformation.
+\newblock {\em Advanced Robotics}, Vol.~30, No.~13, pp. 825--845, 2016.
+
+\bibitem{Oung2010}
+R.~Oung, F.~Bourgault, M.~Donovan, and R.~D'Andrea.
+\newblock The distributed flight array.
+\newblock In {\em Robotics and Automation (ICRA), 2010 IEEE International
+  Conference on}, pp. 601--607, 2010.
+
+\bibitem{Young}
+P.~C. YOUNG and J.~C. WILLEMS.
+\newblock An approach to the linear multivariable servomechanism problem.
+\newblock {\em International Journal of Control}, Vol.~15, No.~5, pp. 961--979,
+  1972.
+
+\bibitem{Zhao2014}
+Moju Zhao, Koji Kawasaki, Yohei Kakiuchi, Kei Okada, and Masayuki Inaba.
+\newblock Simultaneous environment modeling and deployment of network by
+  dropping wireless modules based on radio field intensity measurement using an
+  micro aerial robot.
+\newblock {\em Journal of the Robotics Society of Japan}, Vol.~32, No.~7, pp.
+  643--650, 2014.
+
+\bibitem{Matsui2005}
+T.~Matsui, H.~Hirukawa, Y.~Ishikawa, N.~Yamasaki, S.~Kagami, F.~Kanehiro,
+  H.~Saito, and T.~Inamura.
+\newblock Distributed real-time processing for humanoid robots.
+\newblock In {\em 11th IEEE International Conference on Embedded and Real-Time
+  Computing Systems and Applications (RTCSA'05)}, pp. 205--210, 2005.
+
+\bibitem{CAN}
+K.~Etschberger.
+\newblock {\em Controller Area Network: Basics, Protocols, Chips and
+  Applications}.
+\newblock 2001.
+
+\bibitem{OZEKI2003}
+Takashi OZEKI.
+\newblock A convergent property of steepest descent method in minimizing
+  nonlinear functions.
+\newblock {\em IEICE technical report. Nonlinear problems}, Vol. 103, No. 375,
+  pp. 13--18, oct 2003.
+
+\end{thebibliography}
